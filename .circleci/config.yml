@@ -20,7 +20,6 @@ jobs:
         name: Install dependencies
         command: apk add --update ansible # install the dependencies needed for your playbook
     - run: ansible -m ping localhost
-    - run: cat /etc/ssh/ssh_config
     - run:
         name: Configure server
         command: ANSIBLE_HOST_KEY_CHECKING=false ansible-playbook -i hosts main-remote.yml
