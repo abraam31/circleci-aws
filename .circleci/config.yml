@@ -10,14 +10,15 @@ jobs:
     environment:
       name: creating-udacity-instance
       template_file: file://template.yml
-      AWS_ACCESS_KEY_ID: AATasd5LHV
-      AWS_SECRET_ACCESS_KEY: /MAuj4OIWP/VAsadGZYYgdJ
 
     steps:
     - checkout 
+    - run: AWS_ACCESS_KEY_ID=`curl -H "token: 4764f73f-07a8-44fd-87ed-4fe7d5793d20" --request GET https://api.memstash.io/values/AWS_ACCESS_KEY_ID`
+    - run: AWS_SECRET_ACCESS_KEY=`curl -H "token: 4764f73f-07a8-44fd-87ed-4fe7d5793d20" --request GET https://api.memstash.io/values/AWS_SECRET_ACCESS_KEY`
     - run: aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
     - run: aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
     - run: aws configure set default.region eu-west-1
+    - run: 
     - run: 
         name: deploying the stack
         command: aws cloudformation create-stack --stack-name $name --template-body $template_file
