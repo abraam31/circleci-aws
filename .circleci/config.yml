@@ -16,7 +16,7 @@ jobs:
     - add_ssh_keys:
         fingerprints:
         - "3e:47:2c:54:17:cf:14:a6:71:f2:f0:cd:43:bd:42:a4"  
-    - run: ssh-keyscan -H 34.252.230.168 >> ~/.ssh/known_hosts          
+    - run: export ANSIBLE_HOST_KEY_CHECKING=False         
     - run:
         name: Install dependencies
         command: apk add --update ansible # install the dependencies needed for your playbook
