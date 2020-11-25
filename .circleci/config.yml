@@ -6,23 +6,22 @@ orbs:
 jobs:
   deployStack:
     docker:
-    - image: amazon/aws-cli
+    - image: python:3.7-alpine3.11
     environment:
       name: creating-udacity-instance
       template_file: file://template.yml
 
     steps:
-    - checkout 
-    - run: AWS_ACCESS_KEY_ID=`curl -H "token: 4764f73f-07a8-44fd-87ed-4fe7d5793d20" --request GET https://api.memstash.io/values/AWS_ACCESS_KEY_ID`
-    - run: AWS_SECRET_ACCESS_KEY=`curl -H "token: 4764f73f-07a8-44fd-87ed-4fe7d5793d20" --request GET https://api.memstash.io/values/AWS_SECRET_ACCESS_KEY`
-    - run: aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-    - run: aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-    - run: aws configure set default.region eu-west-1
-    - run: 
-    - run: 
-        name: deploying the stack
-        command: aws cloudformation create-stack --stack-name $name --template-body $template_file
-    - run: echo "Deployment done"
+    - checkout
+    - add_ssh_keys:
+        fingerprints:
+        - "3e:47:2c:54:17:cf:14:a6:71:f2:f0:cd:43:bd:42:a4"    
+    - run:
+        name: Install dependencies
+        command: apk add --update ansible # install the dependencies needed for your playbook
+    - run:
+        name: Configure server
+        command: ansible-playbook -i hosts main-remote.yml
 
 workflows:
   deployingStack:
