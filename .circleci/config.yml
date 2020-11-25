@@ -10,8 +10,14 @@ jobs:
     environment:
       name: creating-udacity-instance
       template_file: template.yml
+      AWS_ACCESS_KEY_ID: AKIAWLEW3VR54TWM5LHV
+      AWS_SECRET_ACCESS_KEY: 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
+
     steps:
     - checkout 
+    - run: aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+    - run: aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+    - run: aws configure set default.region eu-west-1
     - run: 
         name: deploying the stack
         command: aws cloudformation create-stack --stack-name $name --template-file $template_file
