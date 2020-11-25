@@ -20,7 +20,7 @@ jobs:
     - run: aws configure set default.region eu-west-1
     - run: 
         name: deploying the stack
-        command: aws cloudformation create-stack --stack-name $name --template-file $template_file
+        command: aws cloudformation create-stack --stack-name $name --template-body $template_file
     - run: echo "Deployment done"
 
 workflows:
