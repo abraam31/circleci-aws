@@ -10,8 +10,8 @@ jobs:
     environment:
       name: creating-udacity-instance
       template_file: file://template.yml
-      AWS_ACCESS_KEY_ID: AKIAWLEW3VR54TWM5LHV
-      AWS_SECRET_ACCESS_KEY: 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
+      AWS_ACCESS_KEY_ID: AATasd5LHV
+      AWS_SECRET_ACCESS_KEY: /MAuj4OIWP/VAsadGZYYgdJ
 
     steps:
     - checkout 
