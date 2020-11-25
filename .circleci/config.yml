@@ -16,10 +16,11 @@ jobs:
     - add_ssh_keys:
         fingerprints:
         - "3e:47:2c:54:17:cf:14:a6:71:f2:f0:cd:43:bd:42:a4"  
-    - run: export ANSIBLE_HOST_KEY_CHECKING=False         
     - run:
         name: Install dependencies
         command: apk add --update ansible # install the dependencies needed for your playbook
+    - run: export ANSIBLE_HOST_KEY_CHECKING=False         
+    - run: ansible -m ping localhost
     - run:
         name: Configure server
         command: ansible-playbook -i hosts main-remote.yml
