@@ -16,3 +16,9 @@ jobs:
         name: deploying the stack
         command: aws cloudformation create-stack --stack-name $name --template-file $template_file
     - run: echo "Deployment done"
+
+workflows:
+  deployingStack:
+    # Run the welcome/run job in its own container
+    jobs:
+      - deployStack
